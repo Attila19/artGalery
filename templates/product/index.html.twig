@@ -1,0 +1,51 @@
+{% extends 'backoffice.html.twig' %}
+
+    {% block titre %}
+        {{ title }}
+    {% endblock %}
+    {% block title %}
+        {{ parent() }} {{ title }}
+    {% endblock %}
+    
+    
+    
+    {% block body %}
+    
+        {{ form(formProduct) }}
+    
+        <table class="table table-dark table-striped mt-5 w-75 mx-auto">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Url photo</th>
+                <th>Nom fichier</th>
+                <th>Prix de Vente</th>
+                <th>Disponibilitée</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+    
+            {% for product in products %}
+                <tr>
+                    <td >{{ product.id }}</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.picture_src }}</td>
+                    <td >{{ product.picture_name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.disponibility }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>
+                        <a href="{{ path('product_update', {'id': product.id}) }}" class="btn btn-info">Modifier</a>
+                        <a onclick="return confirm('Etes-vous sûr?')" href="{{ path('product_delete', {'id': product.id}) }}" class="btn btn-danger">Supprimer</a>
+    
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    
+    
+    {% endblock %}
+    
